@@ -3,11 +3,14 @@ class BooksController < ApplicationController
   before_action :ensure_correct_user, only: [:update, :edit]
   def show
     @book = Book.find(params[:id])
+    @book_new = Book.new
+    @book_comment = BookComment.new
   end
 
   def index
     @books = Book.all
     @book = Book.new
+    @book_comment = BookComment.new
   end
 
   def create
@@ -35,9 +38,9 @@ class BooksController < ApplicationController
     end
   end
 
-  def delete
+  def destroy
     @book = Book.find(params[:id])
-    @book.destoy
+    @book.destroy
     redirect_to books_path
   end
 
